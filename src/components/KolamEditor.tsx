@@ -129,7 +129,7 @@ export const KolamEditor: React.FC = () => {
 				<div className="max-w-6xl mx-auto">
 					<h1 className="text-4xl font-bold text-center tracking-wide">Kolam Generator</h1>
 					<p className="text-center mt-2 text-lg opacity-90">
-						(Let's Generate beautiful traditional South Indian Kolam patterns)
+						<p>{"(Let's Generate beautiful traditional South Indian Kolam patterns)"}</p>
 					</p>
 				</div>
 			</header>
