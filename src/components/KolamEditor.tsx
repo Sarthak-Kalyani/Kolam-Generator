@@ -18,7 +18,8 @@ export const KolamEditor: React.FC = () => {
 	const [size, setSize] = useState(urlParams.size);
 	const [animationSpeed, setAnimationSpeed] = useState(durationToSpeed(urlParams.duration));
 	const [animationDuration, setAnimationDuration] = useState(urlParams.duration);
-	const [initialAutoAnimate, setInitialAutoAnimate] = useState(urlParams.initialAutoAnimate);
+	// removed setInitialAutoAnimate unused var
+	const [initialAutoAnimate] = useState(urlParams.initialAutoAnimate);
 
 	useEffect(() => {
 		updateURL({ size, duration: animationDuration, initialAutoAnimate });
@@ -62,8 +63,8 @@ export const KolamEditor: React.FC = () => {
 			if (initialAutoAnimate) {
 				setTimeout(() => setAnimationState('playing'), 100);
 			}
-		} catch (error) {
-			const errorMessage = error instanceof Error ? error.message : String(error);
+		} catch (err) {
+			const errorMessage = err instanceof Error ? err.message : String(err);
 			alert(`Error generating pattern: ${errorMessage}`);
 		}
 	}, [size, initialAutoAnimate]);
@@ -92,7 +93,7 @@ export const KolamEditor: React.FC = () => {
 					);
 					break;
 			}
-		} catch (error) {
+		} catch {
 			alert('Export failed. Please try again.');
 		} finally {
 			setIsExporting(false);
@@ -106,7 +107,7 @@ export const KolamEditor: React.FC = () => {
 			const embedCode = `<img src="${embedURL}" alt="Kolam Pattern" style="max-width: 100%; height: auto;" />`;
 			await navigator.clipboard.writeText(embedCode);
 			alert('Embed code copied to clipboard!');
-		} catch (error) {
+		} catch {
 			alert('Failed to copy embed code.');
 		}
 	};
@@ -117,7 +118,7 @@ export const KolamEditor: React.FC = () => {
 			const svgContent = await KolamExporter.exportAsSVG(currentPattern);
 			await navigator.clipboard.writeText(svgContent);
 			alert('Raw SVG code copied to clipboard!');
-		} catch (error) {
+		} catch {
 			alert('Failed to copy raw SVG.');
 		}
 	};
@@ -129,7 +130,7 @@ export const KolamEditor: React.FC = () => {
 				<div className="max-w-6xl mx-auto">
 					<h1 className="text-4xl font-bold text-center tracking-wide">Kolam Generator</h1>
 					<p className="text-center mt-2 text-lg opacity-90">
-						<p>{"(Let's Generate beautiful traditional South Indian Kolam patterns)"}</p>
+						(Let&apos;s Generate beautiful traditional South Indian Kolam patterns)
 					</p>
 				</div>
 			</header>
@@ -224,7 +225,7 @@ export const KolamEditor: React.FC = () => {
 									onChange={(e) => setSize(parseInt(e.target.value))}
 									className="flex-1"
 									style={{ accentColor: '#f0c75e' }}
-									/>
+								/>
 								<div className="bg-[#1e1e2f] px-3 py-1 rounded text-[#f0c75e] min-w-[3rem] text-center">{size}</div>
 							</div>
 							<div className="text-xs text-[#f0c75e] mt-1">Creates a {size}x{size} pattern grid</div>
@@ -276,7 +277,7 @@ export const KolamEditor: React.FC = () => {
 			<footer className="p-6 text-white bg-[#1e1e2f] mt-12 rounded-t-lg">
 				<div className="max-w-6xl mx-auto text-center">
 					<p className="text-xl opacity-80">
-						 (Created By Code Learners)
+						(Created By Code Learners)
 					</p>
 				</div>
 			</footer>
