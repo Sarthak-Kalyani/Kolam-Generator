@@ -3,15 +3,14 @@ import { createCanvas } from "canvas";
 export async function GET(request) {
   const { searchParams } = new URL(request.url);
   const size = parseInt(searchParams.get("size") || "500");
-  const dot = searchParams.get("brush") || "#000000";
 
   const canvas = createCanvas(size, size);
   const ctx = canvas.getContext("2d");
 
-  // ❌ Do not paint background → keeps transparency
+  // Transparent background (do nothing, keep default transparent)
 
-  // Draw dots (example pattern)
-  ctx.fillStyle = dot;
+  // White kolam (dots or lines)
+  ctx.fillStyle = "#ffffff"; // white
   for (let x = 50; x < size; x += 100) {
     for (let y = 50; y < size; y += 100) {
       ctx.beginPath();
@@ -20,7 +19,7 @@ export async function GET(request) {
     }
   }
 
-  // Convert to PNG (supports transparency)
+  // Return PNG with transparency
   const buffer = canvas.toBuffer("image/png");
 
   return new Response(buffer, {
