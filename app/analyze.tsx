@@ -4,7 +4,7 @@ import { Stack, useRouter } from 'expo-router';
 import { COLORS, FONT_SIZES, SHADOWS } from '../src/styles/GlobalStyles';
 import { MaterialIcons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
-import {safeEncode} from '../common_js/common'
+import {safeEncode} from '../commom_js/common'
 const backgroundImage = require('../assets/images/background_image.jpeg');
 
 const AnalyzeScreen = () => {
