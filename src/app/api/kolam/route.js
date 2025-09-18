@@ -7,9 +7,9 @@ export async function GET(request) {
   const canvas = createCanvas(size, size);
   const ctx = canvas.getContext("2d");
 
-  // Transparent background (do nothing, keep default transparent)
+  // ⚡ Do NOT fill background → stays transparent
 
-  // White kolam (dots or lines)
+  // White kolam
   ctx.fillStyle = "#ffffff"; // white
   for (let x = 50; x < size; x += 100) {
     for (let y = 50; y < size; y += 100) {
