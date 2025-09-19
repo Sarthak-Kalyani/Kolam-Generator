@@ -7,19 +7,21 @@ export async function GET(request) {
   const canvas = createCanvas(size, size);
   const ctx = canvas.getContext("2d");
 
-  // ⚡ Do NOT fill background → stays transparent
+  // ✅ Do NOT draw a background → transparent
+  ctx.clearRect(0, 0, size, size);
 
-  // White kolam
-  ctx.fillStyle = "#ffffff"; // white
+  // Draw kolam in white
+  ctx.strokeStyle = "#ffffff";
+  ctx.lineWidth = 3;
+
   for (let x = 50; x < size; x += 100) {
     for (let y = 50; y < size; y += 100) {
       ctx.beginPath();
-      ctx.arc(x, y, 10, 0, Math.PI * 2);
-      ctx.fill();
+      ctx.arc(x, y, 20, 0, Math.PI * 2);
+      ctx.stroke();
     }
   }
 
-  // Return PNG with transparency
   const buffer = canvas.toBuffer("image/png");
 
   return new Response(buffer, {

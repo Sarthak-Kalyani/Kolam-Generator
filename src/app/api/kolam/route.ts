@@ -1,37 +1,29 @@
-import { KolamGenerator } from '@/utils/kolamGenerator';
-import { generateKolamSVG } from '@/utils/svgGenerator';
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from "next/server";
+import { createCanvas } from "canvas";
 
-export async function GET(request: NextRequest) {
-	try {
-		const { searchParams } = new URL(request.url);
+export async function GET() {
+  // Create canvas with transparent background
+  const size = 512;
+  const canvas = createCanvas(size, size);
+  const ctx = canvas.getContext("2d");
 
-		// Parse parameters with defaults
-		const size = Math.max(3, Math.min(15, parseInt(searchParams.get('size') || '7')));
-		const background = searchParams.get('background') || '#7b3306'; // amber-900
-		const brush = searchParams.get('brush') || '#ffffff'; // white
+  // Clear with transparency
+  ctx.clearRect(0, 0, size, size);
 
-		// Generate the kolam pattern
-		const pattern = KolamGenerator.generateKolam1D(size);
+  // Draw white kolam
+  ctx.strokeStyle = "white";  // Kolam line color
+  ctx.lineWidth = 3;
 
-		// Generate SVG using the utility function
-		const svgContent = generateKolamSVG(pattern, {
-			background,
-			brush,
-		});
+  ctx.beginPath();
+  ctx.arc(size / 2, size / 2, 200, 0, 2 * Math.PI); // simple circle kolam
+  ctx.stroke();
 
-		return new NextResponse(svgContent, {
-			headers: {
-				'Content-Type': 'image/svg+xml',
-				'Cache-Control': 'public, max-age=3600',
-			},
-		});
-
-	} catch (error) {
-		console.error('Error generating kolam SVG:', error);
-		return NextResponse.json(
-			{ error: 'Failed to generate kolam pattern' },
-			{ status: 500 }
-		);
-	}
+  // Export as transparent PNG
+  const buffer = canvas.toBuffer("image/png");
+  return new NextResponse(buffer, {
+    headers: {
+      "Content-Type": "image/png",
+      "Content-Disposition": "inline; filename=kolam.png",
+    },
+  });
 }
