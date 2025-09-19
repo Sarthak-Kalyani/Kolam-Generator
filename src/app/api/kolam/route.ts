@@ -20,10 +20,10 @@ export async function GET() {
 
   // Export as transparent PNG
   const buffer = canvas.toBuffer("image/png");
-  return new NextResponse(buffer, {
-    headers: {
-      "Content-Type": "image/png",
-      "Content-Disposition": "inline; filename=kolam.png",
-    },
-  });
+  return new NextResponse(new Uint8Array(buffer), {
+  headers: {
+    "Content-Type": "image/png",
+    "Content-Disposition": "inline; filename=kolam.png",
+  },
+});
 }

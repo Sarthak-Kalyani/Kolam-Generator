@@ -656,19 +656,19 @@ export const KolamEditor: React.FC = () => {
                     await KolamExporter.downloadSVG(currentPattern);
                     break;
                 case 'png':
-                    const menu = document.querySelector('.download-menu');
+                    const menu = document.querySelector('.download-menu') as HTMLElement | null;
                     if (menu) menu.style.display = 'none';
                     await KolamExporter.downloadPNG(kolamRef.current, currentPattern.name);
                     if (menu) menu.style.display = '';
                     break;
-                case 'gif':
-                    await KolamExporter.downloadAnimatedGIF(
-                        kolamRef.current,
-                        currentPattern,
-                        currentPattern.name,
-                        { format: 'gif', frameCount: 30, delay: animationDuration }
-                    );
-                    break;
+                // case 'gif':
+                //     await KolamExporter.downloadAnimatedGIF(
+                //         kolamRef.current,
+                //         currentPattern,
+                //         currentPattern.name,
+                //         { format: 'gif', frameCount: 30, delay: animationDuration }
+                //     );
+                //     break;
             }
         } catch (error) {
             alert('Export failed. Please try again.');
