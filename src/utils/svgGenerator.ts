@@ -210,3 +210,5 @@ export function generateKolamSVG(pattern: KolamPattern, options: SVGOptions = {}
 
     return svgContent;
 }
+
+// a
