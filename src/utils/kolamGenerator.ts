@@ -356,7 +356,7 @@ export class KolamGenerator {
 	/**
 	 * Literal translation of draw_kolam.m coordinate conversion
 	 */
-	static drawKolam(M: number[][]): KolamPattern {
+	public static drawKolam(M: number[][]): KolamPattern {
 		// [m n]=size(M);
 		const m = M.length;
 		const n = M[0].length;
@@ -455,7 +455,7 @@ export class KolamGenerator {
 	/**
 	 * Main entry point - generate kolam pattern using algorithm
 	 */
-	static generateKolam1D(size: number): KolamPattern {
+	public static generateKolam1D(size: number): KolamPattern {
 		console.log(`🎨 Generating 1D Kolam of size ${size}`);
 
 		const matrix = this.proposeKolam1D(size);
@@ -467,4 +467,112 @@ export class KolamGenerator {
 
 		return pattern;
 	}
+} 
+export function generateKolam1D(size: number): KolamPattern {
+	return KolamGenerator.generateKolam1D(size);
 }
+
+// 🟢 Temporary mock pattern generators — replace with your real logic later
+export function generateDiamondKolam(size: number): KolamPattern {
+	return KolamGenerator.generateKolam1D(size); // currently reusing 1D
+}
+
+export function generateLotusKolam(size: number): KolamPattern {
+	return KolamGenerator.generateKolam1D(size); // temporary fallback
+}
+
+export function generateStarKolam(size: number): KolamPattern {
+	return KolamGenerator.generateKolam1D(size); // temporary fallback
+}
+
+
+
+
+
+// // add bottom from  here 
+// import { KolamPattern } from '@/types/kolam';
+
+// export function generateKolam1D(size: number): KolamPattern {
+//   // your existing 1D generator logic (already works)
+//   return {
+//     dimensions: { width: 500, height: 500 },
+//     dots: [
+//       { center: { x: 250, y: 250 }, radius: 3 }
+//     ],
+//     curves: []
+//   };
+// }
+
+// // ✅ Diamond Kolam
+// export function generateDiamondKolam(size: number): KolamPattern {
+//   const dots = [];
+//   const curves = [];
+//   const spacing = 40;
+//   const center = 250;
+
+//   for (let i = -size; i <= size; i++) {
+//     const rowDots = size - Math.abs(i);
+//     for (let j = 0; j < rowDots; j++) {
+//       dots.push({
+//         center: {
+//           x: center + (j - (rowDots - 1) / 2) * spacing,
+//           y: center + i * spacing
+//         },
+//         radius: 3
+//       });
+//     }
+//   }
+
+//   return {
+//     dimensions: { width: 500, height: 500 },
+//     dots,
+//     curves
+//   };
+// }
+
+// // ✅ Star Kolam (simple placeholder)
+// export function generateStarKolam(size: number): KolamPattern {
+//   const center = { x: 250, y: 250 };
+//   const dots = [];
+//   const radius = 100;
+//   for (let i = 0; i < 5; i++) {
+//     const angle = (Math.PI / 180) * (72 * i - 90);
+//     dots.push({
+//       center: {
+//         x: center.x + radius * Math.cos(angle),
+//         y: center.y + radius * Math.sin(angle)
+//       },
+//       radius: 3
+//     });
+//   }
+
+//   return {
+//     dimensions: { width: 500, height: 500 },
+//     dots,
+//     curves: []
+//   };
+// }
+
+// // ✅ Lotus Kolam (simple placeholder)
+// export function generateLotusKolam(size: number): KolamPattern {
+//   const dots = [];
+//   const center = 250;
+//   const spacing = 40;
+//   for (let i = 0; i < 3; i++) {
+//     for (let j = 0; j <= i; j++) {
+//       dots.push({
+//         center: {
+//           x: center + (j - i / 2) * spacing,
+//           y: center + i * spacing
+//         },
+//         radius: 3
+//       });
+//     }
+//   }
+
+//   return {
+//     dimensions: { width: 500, height: 500 },
+//     dots,
+//     curves: []
+//   };
+// }

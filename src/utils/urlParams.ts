@@ -14,7 +14,7 @@ export const useKolamURLParams = (): KolamURLParams => {
 	return {
 		size: Math.max(3, Math.min(15, parseInt(searchParams.get('size') || '7'))),
 		duration: Math.max(1000, Math.min(30000, parseInt(searchParams.get('duration') || '10000'))),
-		background: searchParams.get('background') || '#fef3c7',
+		background: searchParams.get('background') || 'transparent',
 		brush: searchParams.get('brush') || '#92400e',
 		initialAutoAnimate: searchParams.get('initial-auto-animate') === 'true' // defaults to true unless explicitly set to false
 	};
@@ -45,7 +45,7 @@ export const generateEmbedURL = (params: Partial<KolamURLParams>, baseURL?: stri
 	const defaults: KolamURLParams = {
 		size: 7,
 		duration: 10000, // Not used by API, but kept for interface consistency
-		background: '#fef3c7',
+		background: 'transparent',
 		brush: '#92400e',
 		initialAutoAnimate: false
 	};
