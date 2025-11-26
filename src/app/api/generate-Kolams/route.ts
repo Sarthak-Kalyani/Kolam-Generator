@@ -387,8 +387,8 @@ import {
   generateDiamondKolam, 
   generateLotusKolam, 
   generateStarKolam 
-} from '@/utils/kolamGenerator';
-import { generateKolamSVG } from '@/utils/svgGenerator';
+} from '../../../utils/kolamGenerator';
+import { generateKolamSVG } from '../../../utils/svgGenerator';
 
 export async function GET(req: Request) {
   try {

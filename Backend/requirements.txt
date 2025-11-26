@@ -1,9 +1,0 @@
-boto3
-psycopg2-binary
-typing
-pydantic
-uvicorn
-fastapi
-python-multipart
-requests
-supabase

@@ -1,4 +1,4 @@
-import { CurvePoint } from '@/types/kolam';
+import { CurvePoint } from '../types/kolam';
 
 /**
  * Generate SVG path string from curve points using quadratic Bezier curves

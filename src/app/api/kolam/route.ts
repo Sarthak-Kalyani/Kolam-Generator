@@ -247,8 +247,8 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import sharp from 'sharp';
-import { generateKolam1D } from '@/utils/kolamGenerator';
-import { generateKolamSVG } from '@/utils/svgGenerator';
+import { generateKolam1D } from '../../../utils/kolamGenerator';
+import { generateKolamSVG } from '../../../utils/svgGenerator';
 
 /**
  * Example URL:

@@ -56,7 +56,7 @@
     "jsx": "preserve",
     "jsxImportSource": "react",
     "incremental": true,
-    "baseUrl": "src",
+    "baseUrl": "Genertion/src",
     "paths": {
       "@/*": ["*"]
     },
@@ -70,7 +70,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    ".next/types/**/*.ts"
+    "../.next/types/**/*.ts"
   ],
   "exclude": ["node_modules"]
 }

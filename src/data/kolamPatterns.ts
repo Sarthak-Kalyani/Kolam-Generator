@@ -1,7 +1,7 @@
 // Kolam curve patterns
 // All 16 patterns with complete coordinate data extracted
 
-import { KolamCurvePattern } from '@/types/kolam';
+import { KolamCurvePattern } from '../types/kolam';
 import kolamData from './kolamPatternsData.json';
 
 // Convert the JSON data to our pattern format
