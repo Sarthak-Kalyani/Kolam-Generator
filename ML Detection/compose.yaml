@@ -1,0 +1,12 @@
+services:
+  server:
+    build:
+      context: .
+    ports:
+      - 5000:5000
+    volumes:
+      - upload-photos:/data
+    user: root
+
+volumes:
+  upload-photos:
