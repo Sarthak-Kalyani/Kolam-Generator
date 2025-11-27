@@ -1,7 +1,7 @@
 'use client';
 
-import { KOLAM_CURVE_PATTERNS } from '../data/kolamPatterns';
-import { KolamCurvePattern } from '../types/kolam';
+import { KOLAM_CURVE_PATTERNS } from '@/data/kolamPatterns';
+import { KolamCurvePattern } from '@/types/kolam';
 import React from 'react';
 
 interface CurvePatternDebugProps {

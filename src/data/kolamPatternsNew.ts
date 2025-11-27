@@ -1,4 +1,4 @@
-import { KolamCurvePattern } from '../types/kolam';
+import { KolamCurvePattern } from '@/types/kolam';
 
 // The 16 kolam curve patterns with actual coordinates
 export const KOLAM_CURVE_PATTERNS: KolamCurvePattern[] = [

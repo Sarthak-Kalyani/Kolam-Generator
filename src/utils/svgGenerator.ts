@@ -235,8 +235,8 @@
 
 
 // src/utils/svgGenerator.ts
-import { CurvePoint, KolamPattern } from '../types/kolam';
-import { generateSVGPath } from './svgPathGenerator';
+import { CurvePoint, KolamPattern } from '@/types/kolam';
+import { generateSVGPath } from '@/utils/svgPathGenerator';
 
 export interface SVGOptions {
   background?: string;

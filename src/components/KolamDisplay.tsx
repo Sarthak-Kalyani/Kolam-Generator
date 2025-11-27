@@ -1,5 +1,5 @@
-import { CurvePoint, KolamPattern } from '../types/kolam';
-import { generateSVGPath } from '../utils/svgPathGenerator';
+import { CurvePoint, KolamPattern } from '@/types/kolam';
+import { generateSVGPath } from '@/utils/svgPathGenerator';
 import React from 'react';
 
 interface KolamDisplayProps {

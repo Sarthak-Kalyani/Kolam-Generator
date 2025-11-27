@@ -1775,10 +1775,10 @@
 
 'use client';
 
-import { KolamPattern } from '../types/kolam';
-import { KolamExporter } from '../utils/kolamExporter';
-import { KolamGenerator } from '../utils/kolamGenerator';
-import { durationToSpeed, generateEmbedURL, speedToDuration, updateURL, useKolamURLParams } from '../utils/urlParams';
+import { KolamPattern } from '@/types/kolam';
+import { KolamExporter } from '@/utils/kolamExporter';
+import { KolamGenerator } from '@/utils/kolamGenerator';
+import { durationToSpeed, generateEmbedURL, speedToDuration, updateURL, useKolamURLParams } from '@/utils/urlParams';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { KolamDisplay } from './KolamDisplay';
 
