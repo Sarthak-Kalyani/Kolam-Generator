@@ -1,0 +1,33 @@
+services:
+  backend:
+    build: ./Backend
+    container_name: Backend
+    ports:
+      - 8000:8000
+    volumes:
+      - kolam-photos:/photos
+
+  ml:
+    build: ./ML Detection
+    container_name: ML-Pipeline
+    ports:
+      - 5000:5000
+    volumes:
+      - upload-photos:/data
+    user: root
+
+  generation:
+    build: ./Generation
+    container_name: Generation
+    environment:
+      NODE_ENV: production
+    ports:
+      - 3000:3000
+    volumes:
+      - kolam-photos:/photos
+      - ./Generation:/app
+
+
+volumes:
+  upload-photos:
+  kolam-photos:
