@@ -1,4 +1,4 @@
-import { KolamEditor } from '@/components/KolamEditor';
+import { KolamEditor } from '../components/KolamEditor';
 import { Suspense } from 'react';
 
 export default function Home() {

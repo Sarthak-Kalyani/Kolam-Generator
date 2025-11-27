@@ -1,4 +1,4 @@
-import { KolamCurvePattern } from '@/types/kolam';
+import { KolamCurvePattern } from '../types/kolam';
 import kolamData from './kolamPatternsData.json';
 
 // Convert the JSON data to our pattern format

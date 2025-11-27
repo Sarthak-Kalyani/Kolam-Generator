@@ -1,6 +1,6 @@
 // Kolam generator for traditional South Indian geometric patterns
-import { KOLAM_CURVE_PATTERNS } from '@/data/kolamPatterns';
-import { CurvePoint, Dot, KolamPattern, Line } from '@/types/kolam';
+import { KOLAM_CURVE_PATTERNS } from '../data/kolamPatterns';
+import { CurvePoint, Dot, KolamPattern, Line } from '../types/kolam';
 
 export class KolamGenerator {
 	private static readonly CELL_SPACING = 60;

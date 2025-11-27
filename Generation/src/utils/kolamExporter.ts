@@ -213,9 +213,9 @@
 'use client';
 
 import html2canvas from 'html2canvas-pro';
-import { ExportOptions, KolamPattern } from '@/types/kolam';
+import { ExportOptions, KolamPattern } from '../types/kolam';
 import GIF from 'gif.js';
-import { generateKolamSVG } from '@/utils/svgGenerator';  // Import needed here
+import { generateKolamSVG } from './svgGenerator';  // Import needed here
 
 export class KolamExporter {
     static async exportAsSVG(pattern: KolamPattern): Promise<string> {
