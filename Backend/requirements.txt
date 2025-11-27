@@ -1,9 +1,6 @@
-boto3
-psycopg2-binary
-typing
-pydantic
+python-multipart
+aiofiles
+requests
 uvicorn
 fastapi
-python-multipart
-requests
-supabase
+httpx

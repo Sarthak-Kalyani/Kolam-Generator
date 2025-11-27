@@ -2,7 +2,10 @@ from fastapi import FastAPI, UploadFile
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 import requests
-import os
+import aiofiles
+import uvicorn
+import base64
+import httpx
 
 app = FastAPI(debug=True)
 
@@ -18,32 +21,39 @@ app.add_middleware(
 # Config: Your ML pipeline URL (via ngrok)
 # -----------------------------
 ML_PIPELINE_URL = "http://ML-Pipeline:5000/predict"
+GENERATION_URL = "http://Generation:3000/api/generate-Kolams"
+IMAGE_FOLDER_PATH = "/photos"
 
 # -----------------------------
 # Dummy image generation endpoint
 # -----------------------------
 @app.get("/generate")
-async def generate_images(count: int = 10):
-    return "ok"
-    """Generate dummy images (for frontend demo)"""
-    import base64, io
-    from PIL import Image
-    import random
+async def generate_images(type:str = "1D", size:int = 7, count: int = 10) :
+    result = {}
 
-    images = []
-    for i in range(count):
-        img = Image.new(
-            "RGB",
-            (128, 128),
-            color=(random.randint(0,255), random.randint(0,255), random.randint(0,255))
-        )
-        buf = io.BytesIO()
-        img.save(buf, format="PNG")
-        img_bytes = buf.getvalue()
-        img_b64 = base64.b64encode(img_bytes).decode("utf-8")
-        images.append({"name": f"image_{i}.png", "data": img_b64})
+    url = f"{GENERATION_URL}?type={type}&size={size}"
 
-    return JSONResponse(content={"images": images})
+    async with httpx.AsyncClient() as client:
+        for i in range(count):
+            try:
+                res = await client.get(url)
+                res_data = res.json()
+                if not res_data.get("success"):
+                    continue
+
+                file_path = res_data["filePath"]
+                file_name = file_path.split("/")[-1]
+
+                async with aiofiles.open(file_path, "rb") as f:
+                    encoded = base64.b64encode(await f.read()).decode()
+
+                result[file_name] = encoded
+            except Exception as e:
+                # Optionally log errors
+                continue
+
+    return result
+
 
 # -----------------------------
 # Forward file to your ML pipeline
@@ -58,5 +68,4 @@ async def ml_predict(file: UploadFile):
         return JSONResponse(content={"error": str(e)}, status_code=500)
 
 if __name__ == "__main__":
-    import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8000, reload=False)

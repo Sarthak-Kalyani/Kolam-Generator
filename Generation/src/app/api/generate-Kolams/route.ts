@@ -458,8 +458,7 @@ export async function GET(req: Request) {
   } catch (error: any) {
     console.error('❌ Kolam generation failed:', error);
     return NextResponse.json(
-      { success: false, error: 'Failed to generate Kolam image', details: error.message },
-      { status: 500 }
+      { success: false, error: 'Failed to generate Kolam image', details: error.message, status: 500 }
     );
   }
 }
