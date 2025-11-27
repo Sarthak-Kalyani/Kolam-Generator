@@ -435,7 +435,7 @@ export async function GET(req: Request) {
     });
 
     // ✅ Save SVG file to public folder (not src!)
-    const folderPath = path.join(process.cwd(), 'public', 'kolams');
+    const folderPath = path.join('/photos');
     if (!fs.existsSync(folderPath)) fs.mkdirSync(folderPath, { recursive: true });
 
     const fileName = `${type}-${Date.now()}.svg`;
@@ -444,15 +444,15 @@ export async function GET(req: Request) {
 
     console.log(`💾 Saved Kolam: ${filePath}`);
 
-    // ✅ Public URL (accessible from browser)
-    const publicUrl = `/kolams/${fileName}`;
+    // // ✅ Public URL (accessible from browser)
+    // const publicUrl = `/kolams/${fileName}`;
 
     return NextResponse.json({
       success: true,
       message: 'Kolam generated successfully',
       type,
       size,
-      filePath: publicUrl, // 👈 This is the line you asked about
+      filePath: filePath, // 👈 This is the line you asked about
     });
 
   } catch (error: any) {
