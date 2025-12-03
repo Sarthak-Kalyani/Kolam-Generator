@@ -1,50 +1,37 @@
-# # -------------------- Base --------------------
-# FROM node:25-bullseye AS base
-# WORKDIR /usr/src/app
 
-# # -------------------- Deps --------------------
-# FROM base AS deps
-# COPY package.json package-lock.json ./
-
-# # native build deps for node-canvas
-# RUN apt-get update && apt-get install -y \
-#     python3 \
-#     build-essential \
-#     libcairo2-dev \
-#     libjpeg-dev \
-#     libpango1.0-dev \
-#     libpng-dev \
-#     libgif-dev \
-#     librsvg2-dev
-
-# RUN npm ci --omit=dev
-# RUN npm install -D typescript
-
-# # -------------------- Build --------------------
-# FROM deps AS build
-# COPY . .
-# RUN npm run build
-
-# # -------------------- Release --------------------
+# # Version prev
 # FROM node:25-bullseye-slim AS release
 # WORKDIR /usr/src/app
-# COPY --from=build /usr/src/app/dist ./dist
-# COPY --from=build /usr/src/app/node_modules ./node_modules
-# COPY package.json ./
+
+# # copy full source (not dist)
+# COPY . .
+
+# # install deps normally
+# RUN npm install
 
 # EXPOSE 3000
-# CMD ["node", "dist/index.js"]
+# ENV NEXT_TURBOPACK=0
+# CMD ["npm", "run", "dev"]
 
 
 FROM node:25-bullseye-slim AS release
+
 WORKDIR /usr/src/app
 
-# copy full source (not dist)
-COPY . .
+# Copy only package files first (better caching)
+COPY package*.json ./
 
-# install deps normally
+# Install dependencies
 RUN npm install
 
+# Copy the full project AFTER installing deps
+COPY . .
+
+# Build Next.js (Tailwind + PostCSS runs here)
+RUN npm run build
+
+# Expose the port Next.js will use
 EXPOSE 3000
-ENV NEXT_TURBOPACK=0
-CMD ["npm", "run", "dev"]
+
+# Start the production server
+CMD ["npm", "start"]
